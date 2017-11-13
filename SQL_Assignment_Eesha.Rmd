@@ -2,6 +2,7 @@
 title: "Using SQL from R"
 date: "Due Sunday November 12, 11:30pm"
 output: pdf_document
+author: Eesha Pendharkar
 ---
 
 In yesterday's class, you learned how to access a postgres database running on the Amazon cloud. You're going to use the skills you gained yesterday as well as your prior knowledge of R in this assignment.
@@ -267,6 +268,15 @@ library(ggmap)
 
 get_map(location = c(lon = 40.7128, lat = 74.0060), zoom = "auto", scale = "auto")
 ggmap(aes(pickup_longitude, pickup_latitude))
+library(ggplot2)
+
+map <- get_map(location=c(lon=mean(map_data$dropoff_longitude),lat=mean(map_data$dropoff_latitude)),scale=1, zoom=15)
+
+ggmap(map)+
+  geom_point(data=map_data,aes(x=pickup_longitude,y=pickup_latitude))+
+  scale_x_continuous(limits=c(-74.1,-73.7))+
+  scale_y_continuous(limits=c(40.6,40.9))
+
 
 ```
 
